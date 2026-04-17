@@ -250,18 +250,42 @@ function generateFortune() {
     return x - Math.floor(x);
   };
   
-  const moraleValue = Math.floor(seedRandom(hash) * 100);
+  const moraleValue = Math.floor(seedRandom(hash) * 101);
   
-  const fortunes = [
-    { icon: '🎯', text: '本日は大吉！\n戦場で活躍する日\nご武運を！' },
-    { icon: '⭐', text: '吉\n今日は調子が良さそう\nチャレンジしよう！' },
-    { icon: '✨', text: '中吉\n平凡な一日ですが\n堅実に進みましょう' },
-    { icon: '🌙', text: '小吉\nちょっと運が\n味方してくれそう' },
-    { icon: '💫', text: '凶\nしっかり注意して\nチームプレーを大切に' },
+  let moralStatus = '';
+  let statusIcon = '';
+  
+  if (moraleValue === 100) {
+    moralStatus = '戦意高揚V';
+    statusIcon = '⭐';
+  } else if (moraleValue >= 80) {
+    moralStatus = '戦意高揚IV';
+    statusIcon = '✨';
+  } else if (moraleValue >= 60) {
+    moralStatus = '戦意高揚III';
+    statusIcon = '🔥';
+  } else if (moraleValue >= 40) {
+    moralStatus = '戦意高揚II';
+    statusIcon = '💪';
+  } else if (moraleValue >= 20) {
+    moralStatus = '戦意高揚I';
+    statusIcon = '👊';
+  } else {
+    moralStatus = '戦意高揚なし';
+    statusIcon = '😴';
+  }
+  
+  const fortuneMessages = [
+    `${statusIcon}\n${moralStatus}\n本日のあなたの\n戦場での活躍度です`,
+    `${statusIcon}\n${moralStatus}\n高揚をキープして\n勝利に貢献しよう！`,
+    `${statusIcon}\n${moralStatus}\nこの高揚で\nチームをサポートしよう`,
   ];
   
-  const fortuneIndex = Math.floor(seedRandom(hash + 1) * fortunes.length);
-  const fortune = fortunes[fortuneIndex];
+  const fortuneIndex = Math.floor(seedRandom(hash + 1) * fortuneMessages.length);
+  const fortune = {
+    icon: statusIcon,
+    text: fortuneMessages[fortuneIndex],
+  };
   
   return { moraleValue, fortune };
 }
