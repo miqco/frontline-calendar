@@ -643,6 +643,8 @@ function renderBanner(date) {
   if (colorInfo) {
     const rgb = colorInfo.rgb;
     document.querySelector('header').style.background = `linear-gradient(135deg, rgba(${rgb}, 0.8), rgba(${rgb}, 0.6))`;
+    // モーダルオーバーレイの背景もテーマカラーに変更
+    document.getElementById('modal-overlay').style.background = `rgba(${rgb}, 0.25)`;
   }
 }
 
