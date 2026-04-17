@@ -228,6 +228,29 @@ function openModal(date) {
       <ul>${map.notes.tips.map(t => `<li>${t}</li>`).join('')}</ul>
     </div>
   `;
+  // カレンダーセルに選択中のスタイルを適用
+  const selectedCells = document.querySelectorAll('.cal-cell.selected');
+  selectedCells.forEach(cell => cell.classList.remove('selected'));
+  // 選択された日付のセルを特定してスタイルを適用
+  const today = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  const currentCell = document.querySelector(`.cal-cell:not(.other-month) .day-num:contains("${day}")`).closest('.cal-cell');
+  if (currentCell) {
+    currentCell.classList.add('selected');
+    // CSS変数で選択されたマップの色を設定
+    document.documentElement.style.setProperty('--selected-map-color', map.color);
+    // RGB値をCSS変数に設定
+    const colorMap = {
+      'var(--col-saihyo)': '100, 181, 246',
+      'var(--col-onsal)': '255, 183, 77',
+      'var(--col-seal)': '129, 199, 132',
+      'var(--col-gaien)': '186, 104, 200',
+    };
+    document.documentElement.style.setProperty('--selected-map-rgb', colorMap[map.color]);
+  }
+
   document.getElementById('modal-overlay').classList.add('open');
 }
 

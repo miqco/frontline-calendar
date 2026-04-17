@@ -194,6 +194,11 @@ header p {
 .cal-cell.is-today {
   background: var(--today-bg);
 }
+
+.cal-cell.selected {
+  background-color: rgba(var(--selected-map-rgb), 0.2) !important;
+  border: 2px solid var(--selected-map-color) !important;
+}
 .cal-cell.is-today::after {
   content: "";
   position: absolute;
