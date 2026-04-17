@@ -137,7 +137,11 @@ function renderBanner(date) {
   const opts = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' };
   document.getElementById('banner-name').textContent = getFullName(map);
   document.getElementById('banner-name').style.color = map.color;
-  document.getElementById('banner-date').textContent = date.toLocaleDateString('ja-JP', opts);
+  const bannerDate = document.getElementById('banner-date');
+  bannerDate.textContent = date.toLocaleDateString('ja-JP', opts);
+  bannerDate.style.backgroundColor = map.color;
+  bannerDate.style.color = '#fff'; // 背景色に合わせて白文字に
+  
   document.getElementById('today-banner').style.borderColor = map.color;
   
   // ルールの色に応じてヘッダーの背景を変更
@@ -291,17 +295,17 @@ function generateFortune() {
 }
 
 function renderFortune() {
-  const { moraleValue, fortune } = generateFortune();
+  const { moraleValue } = generateFortune();
   
   const moralBar = document.getElementById('morale-bar');
   const moraleText = document.getElementById('morale-text');
-  const fortuneIcon = document.getElementById('fortune-icon');
-  const fortuneText = document.getElementById('fortune-text');
   
-  moralBar.style.setProperty('--morale-value', `${moraleValue}%`);
-  moraleText.textContent = `高揚ゲージ: ${moraleValue}%`;
-  fortuneIcon.textContent = fortune.icon;
-  fortuneText.textContent = fortune.text;
+  if (moralBar) {
+    moralBar.style.setProperty('--morale-value', `${moraleValue}%`);
+  }
+  if (moraleText) {
+    moraleText.textContent = `高揚ゲージ: ${moraleValue}%`;
+  }
 }
 
 init();

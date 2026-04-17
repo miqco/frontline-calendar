@@ -102,10 +102,10 @@ header p {
   font-weight: 900;
 }
 .today-date {
-  color: var(--text-muted);
+  color: #fff;
   font-size: 0.9rem;
   font-weight: 700;
-  background: var(--accent-pink);
+  background: var(--accent-red);
   padding: 4px 12px;
   border-radius: 12px;
 }
