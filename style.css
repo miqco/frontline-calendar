@@ -419,6 +419,125 @@ header p {
   list-style-type: '❤ ';
 }
 
+/* ===== 高揚ゲージ & 運勢占い ===== */
+.fortune-section {
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: var(--shadow-md);
+  border: 2px solid var(--accent-pink);
+}
+
+.fortune-section h3 {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--accent-red);
+  margin-bottom: 20px;
+  font-weight: 900;
+}
+
+.morale-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.morale-gauge {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.morale-bar {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(90deg, #e0e0e0, #f0f0f0);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.morale-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #ff8a80, #ff6b6b, #ff5252);
+  width: var(--morale-value, 0%);
+  border-radius: 18px;
+  transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+.morale-text {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.fortune-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: #fffcfc;
+  padding: 20px;
+  border-radius: 18px;
+  border: 2px dashed var(--accent-pink);
+}
+
+.fortune-icon {
+  font-size: 3rem;
+  animation: fortuneFloat 2s ease-in-out infinite;
+}
+
+@keyframes fortuneFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+.fortune-text {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--accent-red);
+  line-height: 1.5;
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .fortune-section {
+    padding: 18px;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .morale-bar {
+    height: 35px;
+  }
+
+  .fortune-display {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .fortune-icon {
+    font-size: 2.5rem;
+  }
+
+  .fortune-text {
+    font-size: 1rem;
+  }
+}
+
 footer {
   text-align: center;
   margin-top: 30px;

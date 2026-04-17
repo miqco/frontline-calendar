@@ -232,4 +232,53 @@ document.getElementById('modal-overlay').onclick = (e) => { if (e.target.id === 
 document.getElementById('btn-prev').onclick = () => { currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar(); };
 document.getElementById('btn-next').onclick = () => { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(); };
 
+// ===== 高揚ゲージ & 運勢占い =====
+function generateFortune() {
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+  
+  // 日付をシードに使用して疑似乱数を生成
+  let hash = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    const char = dateStr.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // 32bit整数に変換
+  }
+  
+  const seedRandom = (seed) => {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  const moraleValue = Math.floor(seedRandom(hash) * 100);
+  
+  const fortunes = [
+    { icon: '🎯', text: '本日は大吉！\n戦場で活躍する日\nご武運を！' },
+    { icon: '⭐', text: '吉\n今日は調子が良さそう\nチャレンジしよう！' },
+    { icon: '✨', text: '中吉\n平凡な一日ですが\n堅実に進みましょう' },
+    { icon: '🌙', text: '小吉\nちょっと運が\n味方してくれそう' },
+    { icon: '💫', text: '凶\nしっかり注意して\nチームプレーを大切に' },
+  ];
+  
+  const fortuneIndex = Math.floor(seedRandom(hash + 1) * fortunes.length);
+  const fortune = fortunes[fortuneIndex];
+  
+  return { moraleValue, fortune };
+}
+
+function renderFortune() {
+  const { moraleValue, fortune } = generateFortune();
+  
+  const moralBar = document.getElementById('morale-bar');
+  const moraleText = document.getElementById('morale-text');
+  const fortuneIcon = document.getElementById('fortune-icon');
+  const fortuneText = document.getElementById('fortune-text');
+  
+  moralBar.style.setProperty('--morale-value', `${moraleValue}%`);
+  moraleText.textContent = `高揚ゲージ: ${moraleValue}%`;
+  fortuneIcon.textContent = fortune.icon;
+  fortuneText.textContent = fortune.text;
+}
+
 init();
+renderFortune();
