@@ -232,11 +232,17 @@ function openModal(date) {
   const selectedCells = document.querySelectorAll('.cal-cell.selected');
   selectedCells.forEach(cell => cell.classList.remove('selected'));
   // 選択された日付のセルを特定してスタイルを適用
-  const today = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth();
   const day = date.getDate();
-  const currentCell = document.querySelector(`.cal-cell:not(.other-month) .day-num:contains("${day}")`).closest('.cal-cell');
+  // jQueryの:containsと同等の処理を素のJSで実装
+  const dayNums = document.querySelectorAll('.cal-cell:not(.other-month) .day-num');
+  let currentCell = null;
+  for (let i = 0; i < dayNums.length; i++) {
+    if (dayNums[i].textContent.trim() === String(day)) {
+      currentCell = dayNums[i].closest('.cal-cell');
+      break;
+    }
+  }
+  
   if (currentCell) {
     currentCell.classList.add('selected');
     // CSS変数で選択されたマップの色を設定
