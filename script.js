@@ -2,6 +2,25 @@
 const MAPS = [
   {
     id: 0,
+    name: 'シールロック',
+    shortName: 'シルロ',
+    rule: '争奪戦',
+    color: 'var(--col-seal)',
+    icon: '🏴',
+    notes: {
+      overview: 'ランダムに起動する「アラガントームストーン」を占拠・維持するマップです。',
+      points: [
+        '起動した「トームストーン」から情報値を継続的に抽出',
+        '敵プレイヤーを倒すとポイント加算、倒されると減少',
+      ],
+      tips: [
+        'トームストーンの残り残量に注意。なくなりそうなら次の場所へ移動準備！',
+        '他陣営に挟まれないようにマップをこまめに見よう',
+      ],
+    },
+  },
+  {
+    id: 1,
     name: 'フィールド・オブ・グローリー',
     shortName: '砕氷戦',
     rule: '砕氷戦',
@@ -21,7 +40,7 @@ const MAPS = [
     },
   },
   {
-    id: 1,
+    id: 2,
     name: 'オンサル・ハカイル',
     shortName: 'オンサル',
     rule: '終節戦',
@@ -37,25 +56,6 @@ const MAPS = [
       tips: [
         '次にどこで土地が出るか予兆をしっかり確認しよう',
         'Sランクの土地は争奪が激しいので、仲間としっかり協力してね！',
-      ],
-    },
-  },
-  {
-    id: 2,
-    name: 'シールロック',
-    shortName: 'シルロ',
-    rule: '争奪戦',
-    color: 'var(--col-seal)',
-    icon: '🏴',
-    notes: {
-      overview: 'ランダムに起動する「アラガントームストーン」を占拠・維持するマップです。',
-      points: [
-        '起動した「トームストーン」から情報値を継続的に抽出',
-        '敵プレイヤーを倒すとポイント加算、倒されると減少',
-      ],
-      tips: [
-        'トームストーンの残り残量に注意。なくなりそうなら次の場所へ移動準備！',
-        '他陣営に挟まれないようにマップをこまめに見よう',
       ],
     },
   },
@@ -82,7 +82,7 @@ const MAPS = [
   },
 ];
 
-const INITIAL_BASE_DATE = new Date(2026, 3, 17); // 基準日: 4/17 = 砕氷戦
+const INITIAL_BASE_DATE = new Date(2026, 3, 24); // 基準日: 4/24 = シルロ
 let BASE_DATE = new Date(INITIAL_BASE_DATE);
 
 const savedBaseDate = localStorage.getItem('fl_base_date');
